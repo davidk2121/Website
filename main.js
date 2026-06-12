@@ -93,6 +93,8 @@ burger.addEventListener('click', () => {
   menuOpen = !menuOpen;
   mobileMenu.classList.toggle('open', menuOpen);
   document.body.style.overflow = menuOpen ? 'hidden' : '';
+  burger.setAttribute('aria-expanded', menuOpen);
+  burger.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
   burger.querySelector('span:first-child').style.transform = menuOpen ? 'rotate(45deg) translate(4px, 4px)' : '';
   burger.querySelector('span:last-child').style.transform = menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : '';
 });
