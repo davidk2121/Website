@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renco — Reimagine Your Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Noise overlay -->
+  <canvas id="noiseCanvas" class="noise-canvas"></canvas>
+
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">RENCO</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+    <button class="nav-burger" id="burger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#services" class="mobile-link">Services</a></li>
+      <li><a href="#work" class="mobile-link">Work</a></li>
+      <li><a href="#process" class="mobile-link">Process</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#contact" class="mobile-link">Get a Quote</a></li>
+    </ul>
+  </div>
+
+  <!-- ─── HERO ─────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-grid"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">Premium Home Renovation · Fife, WA</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-line"><span class="hero-word">Reimagine</span></span>
+        <span class="hero-line"><span class="hero-word italic">Your</span></span>
+        <span class="hero-line"><span class="hero-word">Home.</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        We transform ordinary spaces into extraordinary living experiences.<br />
+        Expert craftsmanship, timeless design, lasting results.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">
+          <span>See Our Work</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#contact" class="btn-ghost">Start Your Project</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <!-- Floating cards -->
+    <div class="hero-card card-1">
+      <div class="card-icon">✦</div>
+      <div>
+        <div class="card-num">500+</div>
+        <div class="card-label">Projects Completed</div>
+      </div>
+    </div>
+    <div class="hero-card card-2">
+      <div class="card-icon">✦</div>
+      <div>
+        <div class="card-num">20+</div>
+        <div class="card-label">Years Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ────────────────────────────────────────── -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span>Kitchen Remodels</span><span class="dot">✦</span>
+      <span>Bathroom Renovations</span><span class="dot">✦</span>
+      <span>Basement Finishing</span><span class="dot">✦</span>
+      <span>Custom Additions</span><span class="dot">✦</span>
+      <span>Foundation Repair</span><span class="dot">✦</span>
+      <span>Whole-Home Renovations</span><span class="dot">✦</span>
+      <span>Kitchen Remodels</span><span class="dot">✦</span>
+      <span>Bathroom Renovations</span><span class="dot">✦</span>
+      <span>Basement Finishing</span><span class="dot">✦</span>
+      <span>Custom Additions</span><span class="dot">✦</span>
+      <span>Foundation Repair</span><span class="dot">✦</span>
+      <span>Whole-Home Renovations</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ─── STATS ─────────────────────────────────────────── -->
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" data-count="500" data-suffix="+">
+          <div class="stat-num"><span class="counter">0</span><span>+</span></div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item" data-count="20" data-suffix="+">
+          <div class="stat-num"><span class="counter">0</span><span>+</span></div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div class="stat-item" data-count="98" data-suffix="%">
+          <div class="stat-num"><span class="counter">0</span><span>%</span></div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+        <div class="stat-item" data-count="50" data-suffix="+">
+          <div class="stat-num"><span class="counter">0</span><span>+</span></div>
+          <div class="stat-label">Awards & Recognitions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ──────────────────────────────────────── -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Crafted for <em>every</em><br/>corner of your home</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card" data-index="01">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 28V14L16 4l12 10v14H20v-8h-8v8H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Kitchen Remodels</h3>
+          <p>Transform the heart of your home. Custom cabinetry, countertops, and layouts designed around how you live.</p>
+          <a href="#contact" class="service-link">Learn more →</a>
+          <div class="service-number">01</div>
+        </div>
+
+        <div class="service-card" data-index="02">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M10 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="17" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Bathroom Renovations</h3>
+          <p>Spa-quality retreats built to last. From walk-in showers to freestanding tubs — every detail considered.</p>
+          <a href="#contact" class="service-link">Learn more →</a>
+          <div class="service-number">02</div>
+        </div>
+
+        <div class="service-card" data-index="03">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 28V8h24v20H4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 8l12-5 12 5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 28v-8h8v8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Basement Finishing</h3>
+          <p>Unlock the full potential of your home. We turn unused space into functional, stunning living areas.</p>
+          <a href="#contact" class="service-link">Learn more →</a>
+          <div class="service-number">03</div>
+        </div>
+
+        <div class="service-card" data-index="04">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 26V12M26 26V12M2 14l14-10 14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="12" y="18" width="8" height="8" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Custom Additions</h3>
+          <p>Expand your space, expand your life. Seamlessly integrated additions that feel like they were always there.</p>
+          <a href="#contact" class="service-link">Learn more →</a>
+          <div class="service-number">04</div>
+        </div>
+
+        <div class="service-card" data-index="05">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4L4 16h4v12h6v-8h4v8h6V16h4L16 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Foundation Repair</h3>
+          <p>The strength your home deserves. Expert structural repairs that protect your investment for decades.</p>
+          <a href="#contact" class="service-link">Learn more →</a>
+          <div class="service-number">05</div>
+        </div>
+
+        <div class="service-card service-card--cta" data-index="06">
+          <div class="service-cta-inner">
+            <h3>Have a project in mind?</h3>
+            <p>Let's talk about turning your vision into reality.</p>
+            <a href="#contact" class="btn-primary btn-small">
+              <span>Get Free Estimate</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WORK / PORTFOLIO ──────────────────────────────── -->
+  <section class="work-section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Work</span>
+        <h2 class="section-title">Every project tells<br/>a <em>unique</em> story</h2>
+      </div>
+    </div>
+
+    <div class="work-grid">
+      <div class="work-item work-item--large reveal">
+        <div class="work-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+          <div class="work-placeholder">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="8" y="20" width="48" height="36" rx="2" stroke="rgba(201,169,110,0.6)" stroke-width="2"/><path d="M8 32l20-10 16 8 12-6" stroke="rgba(201,169,110,0.6)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="28" r="4" stroke="rgba(201,169,110,0.6)" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-tag">Kitchen</span>
+          <h3>Modern Farmhouse Kitchen</h3>
+          <p>Complete gut renovation — custom walnut cabinetry, marble island, and open-plan living integration.</p>
+        </div>
+      </div>
+
+      <div class="work-item reveal">
+        <div class="work-img" style="background: linear-gradient(135deg, #0d1117 0%, #1c2951 100%);">
+          <div class="work-placeholder">
+            <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect x="12" y="8" width="40" height="48" rx="2" stroke="rgba(201,169,110,0.6)" stroke-width="2"/><path d="M20 32h24M20 40h16" stroke="rgba(201,169,110,0.6)" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="20" r="6" stroke="rgba(201,169,110,0.6)" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-tag">Bathroom</span>
+          <h3>Spa Master Suite</h3>
+          <p>Heated floors, steam shower, and free-standing soaker tub.</p>
+        </div>
+      </div>
+
+      <div class="work-item reveal">
+        <div class="work-img" style="background: linear-gradient(135deg, #0a0a0a 0%, #2d1b4e 100%);">
+          <div class="work-placeholder">
+            <svg width="48" height="48" viewBox="0 0 64 64" fill="none"><path d="M8 56V24L32 8l24 16v32H40V40H24v16H8z" stroke="rgba(201,169,110,0.6)" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-tag">Addition</span>
+          <h3>Two-Story Addition</h3>
+          <p>Seamless 900 sq ft addition with matching exterior detailing.</p>
+        </div>
+      </div>
+
+      <div class="work-item work-item--large reveal">
+        <div class="work-img" style="background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #374151 100%);">
+          <div class="work-placeholder">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="4" y="32" width="56" height="24" rx="2" stroke="rgba(201,169,110,0.6)" stroke-width="2"/><rect x="16" y="16" width="32" height="18" stroke="rgba(201,169,110,0.6)" stroke-width="2"/><path d="M28 32v24M36 32v24" stroke="rgba(201,169,110,0.6)" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-tag">Basement</span>
+          <h3>Entertainment Basement</h3>
+          <p>Full bar, home theater, gym, and guest suite in a single 1,200 sq ft transformation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BEFORE / AFTER ────────────────────────────────── -->
+  <section class="ba-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">The Transformation</span>
+        <h2 class="section-title">See the <em>difference</em><br/>we make</h2>
+      </div>
+
+      <div class="ba-wrapper">
+        <div class="ba-slider" id="baSlider">
+          <div class="ba-before">
+            <div class="ba-label">Before</div>
+            <div class="ba-img ba-img--before">
+              <div class="ba-placeholder">
+                <span>Before</span>
+                <p>Outdated · Worn · Uninspired</p>
+              </div>
+            </div>
+          </div>
+          <div class="ba-after">
+            <div class="ba-label">After</div>
+            <div class="ba-img ba-img--after">
+              <div class="ba-placeholder">
+                <span>After</span>
+                <p>Transformed · Modern · Breathtaking</p>
+              </div>
+            </div>
+          </div>
+          <div class="ba-handle" id="baHandle">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-circle">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 7l-4 3 4 3M14 7l4 3-4 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="ba-handle-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROCESS ───────────────────────────────────────── -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">How It Works</span>
+        <h2 class="section-title">Simple process,<br/><em>extraordinary</em> results</h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3>Free Consultation</h3>
+            <p>We visit your home, listen to your vision, and assess what's possible. No pressure, no commitment — just honest conversation.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="process-step reveal">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3>Design & Planning</h3>
+            <p>Our design team creates detailed plans and 3D renders so you can see exactly how your space will transform before we break ground.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="process-step reveal">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3>Expert Execution</h3>
+            <p>Our master craftsmen get to work with precision and care. Regular updates keep you informed at every stage.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="process-step reveal">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h3>Reveal & Warranty</h3>
+            <p>The moment you've been waiting for. We walk you through every detail and back our work with a comprehensive warranty.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ──────────────────────────────────── -->
+  <section class="testimonials-section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Client Stories</span>
+        <h2 class="section-title">Trusted by<br/><em>homeowners</em> like you</h2>
+      </div>
+
+      <div class="testimonials-carousel">
+        <div class="testimonials-track" id="testimonialsTrack">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"Renco completely transformed our 1970s kitchen into a modern masterpiece. The attention to detail was incredible — they treated our home like their own."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">SJ</div>
+              <div>
+                <div class="author-name">Sarah Johnson</div>
+                <div class="author-loc">Fife, WA</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"From the first consultation to the final reveal, the experience was flawless. Our basement went from storage space to our family's favorite room in the house."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">MT</div>
+              <div>
+                <div class="author-name">Mike Thompson</div>
+                <div class="author-loc">Tacoma, WA</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"The bathroom renovation exceeded every expectation. It feels like a five-star hotel. I genuinely look forward to getting up in the morning now."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">ER</div>
+              <div>
+                <div class="author-name">Emily Rodriguez</div>
+                <div class="author-loc">Puyallup, WA</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <blockquote>"We hired Renco for a full home renovation and they delivered on every promise. On time, on budget, and absolutely stunning. Highly recommend."</blockquote>
+            <div class="testimonial-author">
+              <div class="author-avatar">DL</div>
+              <div>
+                <div class="author-name">David Lee</div>
+                <div class="author-loc">Auburn, WA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevBtn" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <button class="carousel-btn" id="nextBtn" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ───────────────────────────────────────────── -->
+  <section class="cta-section" id="contact">
+    <div class="cta-bg">
+      <div class="cta-glow cta-glow-1"></div>
+      <div class="cta-glow cta-glow-2"></div>
+    </div>
+    <div class="container">
+      <div class="cta-inner">
+        <span class="section-label">Ready to Begin?</span>
+        <h2 class="cta-title">Your dream home<br/>is <em>one call away</em></h2>
+        <p class="cta-sub">Get a free, no-obligation estimate. We'll visit your home, listen to your ideas, and show you exactly what's possible.</p>
+
+        <form class="cta-form" id="ctaForm">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email Address" required autocomplete="email" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <select name="service">
+                <option value="" disabled selected>Type of Project</option>
+                <option>Kitchen Remodel</option>
+                <option>Bathroom Renovation</option>
+                <option>Basement Finishing</option>
+                <option>Custom Addition</option>
+                <option>Foundation Repair</option>
+                <option>Whole-Home Renovation</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group--full">
+            <textarea name="message" placeholder="Tell us about your project..." rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-submit">
+            <span>Request Free Estimate</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+
+        <div class="cta-contact-alts">
+          <a href="tel:+12535550100" class="contact-alt">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 3.5C2 2.67 2.67 2 3.5 2h2.236a1 1 0 0 1 .949.684l.816 2.45a1 1 0 0 1-.23 1.04L5.98 7.46a10.015 10.015 0 0 0 4.56 4.56l1.286-1.29a1 1 0 0 1 1.04-.23l2.45.816A1 1 0 0 1 16 12.264V14.5A1.5 1.5 0 0 1 14.5 16C7.596 16 2 10.404 2 3.5z" stroke="currentColor" stroke-width="1.2"/></svg>
+            (253) 555-0100
+          </a>
+          <a href="mailto:hello@renco.co" class="contact-alt">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 6l7 5 7-5" stroke="currentColor" stroke-width="1.2"/></svg>
+            hello@renco.co
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">RENCO</div>
+          <p>Reimagine Your Home.<br/>Expert renovation services in the Pacific Northwest.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="4" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="10" r="3.5" stroke="currentColor" stroke-width="1.3"/><circle cx="14" cy="6" r="1" fill="currentColor"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H7v3h2v7h3v-7h2.5l.5-3H12V6.5A.5.5 0 0 1 12.5 6H15V3z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" aria-label="Houzz">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 17V7l6-4 6 4v10H4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M4 11h6v6H4" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#services">Kitchen Remodels</a></li>
+              <li><a href="#services">Bathroom Renovations</a></li>
+              <li><a href="#services">Basement Finishing</a></li>
+              <li><a href="#services">Custom Additions</a></li>
+              <li><a href="#services">Foundation Repair</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#work">Our Work</a></li>
+              <li><a href="#process">Our Process</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="tel:+12535550100">(253) 555-0100</a></li>
+              <li><a href="mailto:hello@renco.co">hello@renco.co</a></li>
+              <li>Fife, WA</li>
+              <li>Serving the Pacific Northwest</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Renco LLC. All rights reserved.</p>
+        <p>Licensed & Insured · WA Contractor #RENCOL*123AB</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger + Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
