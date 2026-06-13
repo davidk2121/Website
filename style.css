@@ -737,10 +737,14 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
   clip-path: inset(0 50% 0 0);
   transition: clip-path 0s;
 }
-.room-svg {
+.ba-photo {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
+}
+.ba-before .ba-photo {
+  filter: grayscale(0.75) sepia(0.5) brightness(0.6) contrast(1.08) saturate(0.2) hue-rotate(8deg);
 }
 .ba-caption {
   max-width: 680px; margin: 24px auto 0;
