@@ -116,16 +116,16 @@ window.addEventListener('load', () => {
   const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
   tl
-    .to('.eyebrow-line', { scaleX: 1, duration: 0.8, delay: 0.2 })
-    .to('.eyebrow-text', { opacity: 1, duration: 0.6 }, '-=0.4')
-    .to('.hero-word', {
-      y: 0, duration: 1.1, stagger: 0.12,
+    .from('.eyebrow-line', { scaleX: 0, duration: 0.8, delay: 0.2 })
+    .from('.eyebrow-text', { opacity: 0, duration: 0.6 }, '-=0.4')
+    .from('.hero-word', {
+      y: '110%', duration: 1.1, stagger: 0.12,
       ease: 'power4.out'
     }, '-=0.3')
-    .to('.hero-sub', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
-    .to('.hero-actions', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
-    .to('.card-1', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
-    .to('.card-2', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6');
+    .from('.hero-sub', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
+    .from('.hero-actions', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
+    .from('.card-1', { opacity: 0, y: 30, duration: 0.8 }, '-=0.4')
+    .from('.card-2', { opacity: 0, y: 30, duration: 0.8 }, '-=0.6');
 });
 
 // ─── HERO PARALLAX ───────────────────────────
@@ -160,9 +160,14 @@ const revealObserver = new IntersectionObserver(
       revealObserver.unobserve(e.target);
     }
   }),
-  { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
 );
-reveals.forEach(el => revealObserver.observe(el));
+// Apply initial hidden state via JS so elements are visible without JS
+reveals.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(28px)';
+  revealObserver.observe(el);
+});
 
 // ─── STATS COUNTER ───────────────────────────
 function animateCounter(el, target, duration = 1800) {
