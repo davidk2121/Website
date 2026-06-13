@@ -72,7 +72,7 @@ if (window.matchMedia('(hover: hover)').matches) {
     requestAnimationFrame(animateCursor);
   })();
 
-  document.querySelectorAll('a, button, .service-card, .work-item, .ba-slider').forEach(el => {
+  document.querySelectorAll('a, button, .service-card, .work-item, [data-slider]').forEach(el => {
     el.addEventListener('mouseenter', () => follower.classList.add('hovered'));
     el.addEventListener('mouseleave', () => follower.classList.remove('hovered'));
   });
@@ -214,64 +214,74 @@ gsap.from('.step-num', {
   }
 });
 
-// ─── BEFORE / AFTER SLIDER ───────────────────
+// ─── BEFORE / AFTER SLIDERS (tabbed) ─────────
 (function () {
-  const slider = document.getElementById('baSlider');
-  const handle = document.getElementById('baHandle');
-  const after = slider.querySelector('.ba-after');
+  function initSlider(slider) {
+    const handle = slider.querySelector('.ba-handle');
+    const after = slider.querySelector('.ba-after');
+    let dragging = false;
 
-  let dragging = false;
-  let pct = 50;
+    function setPos(x) {
+      const rect = slider.getBoundingClientRect();
+      const pct = Math.max(5, Math.min(95, ((x - rect.left) / rect.width) * 100));
+      handle.style.left = pct + '%';
+      after.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+      slider.classList.add('dragged');
+    }
 
-  function setPosition(x) {
-    const rect = slider.getBoundingClientRect();
-    pct = Math.max(5, Math.min(95, ((x - rect.left) / rect.width) * 100));
-    handle.style.left = pct + '%';
-    after.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+    window.addEventListener('mouseup', () => { dragging = false; });
+    window.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+
+    handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
+    window.addEventListener('touchend', () => { dragging = false; });
+    window.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+
+    // Scroll-in animation (intro sweep)
+    const obs = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      const proxy = { pct: 50 };
+      gsap.to(proxy, {
+        pct: 30, duration: 1.4, ease: 'power3.inOut',
+        onUpdate: () => setPos(slider.getBoundingClientRect().left + (proxy.pct / 100) * slider.getBoundingClientRect().width),
+        onComplete: () => {
+          gsap.to(proxy, {
+            pct: 50, duration: 0.9, ease: 'power2.out',
+            onUpdate: () => setPos(slider.getBoundingClientRect().left + (proxy.pct / 100) * slider.getBoundingClientRect().width),
+            onComplete: () => slider.classList.remove('dragged') // re-show hint after intro
+          });
+        }
+      });
+      obs.unobserve(slider);
+    }, { threshold: 0.35 });
+    obs.observe(slider);
   }
 
-  // Mouse
-  handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
-  window.addEventListener('mouseup', () => { dragging = false; });
-  window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
+  // Init all sliders
+  document.querySelectorAll('[data-slider]').forEach(initSlider);
 
-  // Touch
-  handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
-  window.addEventListener('touchend', () => { dragging = false; });
-  window.addEventListener('touchmove', e => {
-    if (dragging) setPosition(e.touches[0].clientX);
-  }, { passive: true });
-
-  // Animate on scroll into view
-  const baObserver = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) return;
-    gsap.fromTo({ pct: 50 }, { pct: 90 }, {
-      pct: 35,
-      duration: 1.8,
-      ease: 'power3.inOut',
-      onUpdate: function () {
-        setPosition(
-          slider.getBoundingClientRect().left +
-          (this.targets()[0].pct / 100) * slider.getBoundingClientRect().width
-        );
-      },
-      onComplete: () => {
-        gsap.to({ pct: 35 }, {
-          pct: 50,
-          duration: 1,
-          ease: 'power2.out',
-          onUpdate: function () {
-            setPosition(
-              slider.getBoundingClientRect().left +
-              (this.targets()[0].pct / 100) * slider.getBoundingClientRect().width
-            );
-          }
-        });
-      }
+  // Tab switching
+  document.querySelectorAll('.ba-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const project = tab.dataset.project;
+      document.querySelectorAll('.ba-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.ba-project').forEach(p => p.classList.remove('active'));
+      const active = document.querySelector(`.ba-project[data-project="${project}"]`);
+      active.classList.add('active');
+      // Reset slider to center on switch
+      const slider = active.querySelector('[data-slider]');
+      const handle = slider.querySelector('.ba-handle');
+      const after = slider.querySelector('.ba-after');
+      handle.style.left = '50%';
+      after.style.clipPath = 'inset(0 50% 0 0)';
+      slider.classList.remove('dragged');
     });
-    baObserver.unobserve(slider);
-  }, { threshold: 0.4 });
-  baObserver.observe(slider);
+  });
 })();
 
 // ─── TESTIMONIALS CAROUSEL ───────────────────
