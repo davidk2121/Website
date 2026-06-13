@@ -16,8 +16,19 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// Sync GSAP ScrollTrigger with Lenis
-lenis.on('scroll', ScrollTrigger.update);
+// Sync GSAP ScrollTrigger with Lenis + scroll progress bar
+// (nav referenced here is declared in NAV SCROLL STATE section below — hoisted)
+const scrollProgressBar = document.getElementById('scrollProgress');
+const nav = document.getElementById('nav');
+
+lenis.on('scroll', ({ scroll, limit }) => {
+  nav.classList.toggle('scrolled', scroll > 60);
+  if (scrollProgressBar) {
+    scrollProgressBar.style.width = (scroll / limit * 100) + '%';
+  }
+  ScrollTrigger.update();
+});
+
 gsap.ticker.add(time => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
@@ -37,16 +48,17 @@ gsap.ticker.lagSmoothing(0);
 
   let frame = 0;
   function drawNoise() {
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      const v = Math.random() * 255;
-      data[i] = data[i + 1] = data[i + 2] = v;
-      data[i + 3] = 18;
-    }
-    ctx.putImageData(imageData, 0, 0);
     frame++;
-    if (frame % 2 === 0) requestAnimationFrame(drawNoise);
-    else requestAnimationFrame(drawNoise);
+    if (frame % 2 === 0) {
+      const data = imageData.data;
+      for (let i = 0; i < data.length; i += 4) {
+        const v = Math.random() * 255;
+        data[i] = data[i + 1] = data[i + 2] = v;
+        data[i + 3] = 18;
+      }
+      ctx.putImageData(imageData, 0, 0);
+    }
+    requestAnimationFrame(drawNoise);
   }
   drawNoise();
 })();
@@ -78,11 +90,25 @@ if (window.matchMedia('(hover: hover)').matches) {
   });
 }
 
+// ─── MAGNETIC BUTTONS ────────────────────────
+if (window.matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.14}px, ${y * 0.18}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      setTimeout(() => { btn.style.transition = ''; }, 400);
+    });
+  });
+}
+
 // ─── NAV SCROLL STATE ────────────────────────
-const nav = document.getElementById('nav');
-lenis.on('scroll', ({ scroll }) => {
-  nav.classList.toggle('scrolled', scroll > 60);
-});
+// (nav declared above; scroll toggle is in lenis scroll handler)
 
 // ─── MOBILE MENU ────────────────────────────
 const burger = document.getElementById('burger');
@@ -112,9 +138,8 @@ document.querySelectorAll('.mobile-link').forEach(link => {
 // ─── HERO ENTRANCE ANIMATION ─────────────────
 gsap.registerPlugin(ScrollTrigger);
 
-window.addEventListener('load', () => {
+function startHeroEntrance() {
   const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
   tl
     .from('.eyebrow-line', { scaleX: 0, duration: 0.8, delay: 0.2 })
     .from('.eyebrow-text', { opacity: 0, duration: 0.6 }, '-=0.4')
@@ -126,6 +151,23 @@ window.addEventListener('load', () => {
     .from('.hero-actions', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
     .from('.card-1', { opacity: 0, y: 30, duration: 0.8 }, '-=0.4')
     .from('.card-2', { opacity: 0, y: 30, duration: 0.8 }, '-=0.6');
+}
+
+// ─── PRELOADER ───────────────────────────────
+const preloader = document.getElementById('preloader');
+
+window.addEventListener('load', () => {
+  if (preloader) {
+    setTimeout(() => {
+      preloader.classList.add('leaving');
+      setTimeout(() => {
+        preloader.style.display = 'none';
+        startHeroEntrance();
+      }, 850);
+    }, 1100);
+  } else {
+    startHeroEntrance();
+  }
 });
 
 // ─── HERO PARALLAX ───────────────────────────
@@ -162,7 +204,6 @@ const revealObserver = new IntersectionObserver(
   }),
   { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
 );
-// Apply initial hidden state via JS so elements are visible without JS
 reveals.forEach(el => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(28px)';
@@ -253,7 +294,7 @@ gsap.from('.step-num', {
           gsap.to(proxy, {
             pct: 50, duration: 0.9, ease: 'power2.out',
             onUpdate: () => setPos(slider.getBoundingClientRect().left + (proxy.pct / 100) * slider.getBoundingClientRect().width),
-            onComplete: () => slider.classList.remove('dragged') // re-show hint after intro
+            onComplete: () => slider.classList.remove('dragged')
           });
         }
       });
@@ -262,10 +303,8 @@ gsap.from('.step-num', {
     obs.observe(slider);
   }
 
-  // Init all sliders
   document.querySelectorAll('[data-slider]').forEach(initSlider);
 
-  // Tab switching
   document.querySelectorAll('.ba-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const project = tab.dataset.project;
@@ -278,7 +317,6 @@ gsap.from('.step-num', {
       document.querySelectorAll('.ba-project').forEach(p => p.classList.remove('active'));
       const active = document.querySelector(`.ba-project[data-project="${project}"]`);
       active.classList.add('active');
-      // Reset slider to center on switch
       const slider = active.querySelector('[data-slider]');
       const handle = slider.querySelector('.ba-handle');
       const after = slider.querySelector('.ba-after');
@@ -300,7 +338,6 @@ gsap.from('.step-num', {
   let current = 0;
   let autoTimer;
 
-  // Build dots
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('div');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -326,7 +363,6 @@ gsap.from('.step-num', {
   }
   resetAuto();
 
-  // Swipe
   let startX = 0;
   track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', e => {
